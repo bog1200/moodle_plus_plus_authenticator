@@ -43,4 +43,13 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+
+    <string name="input_ID_number">ID number</string>
+    <string name="input_expiration_date">Expiration date</string>
+    <string name="input_date_of_birth">Date of birth</string>
+
+    <string name="info_loading">Reading data…</string>
+    <string name="info_scan_ID">Please fill the details below and place your phone on top of the ID.\n\nFollowing information is required to decrypt ID data locally. We do not store, upload or share any of your data. The app is completely open source and available for audit.</string>
+    <string name="error_input">Please provide details to read ID</string>
+    <string name="error_read">Failed to read ID</string>
 </resources>
