@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,14 +19,13 @@ import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.CalendarConstraints;
 
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
+import java.security.Security;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    public void openNfcActivity() {
-        Intent intent = new Intent(this, NfcActivity.class);
-        startActivity(intent);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +39,11 @@ public class MainActivity extends AppCompatActivity {
             return insets;
 
         });
-        Button nfcButton = findViewById(R.id.button2);
-        nfcButton.setOnClickListener(view -> openNfcActivity());
+
 
         EditText birthDate = findViewById(R.id.input_date_of_birth);
         EditText expiryDate = findViewById(R.id.input_expiration_date);
+        EditText idNumber = findViewById(R.id.input_passport_number);
         CalendarConstraints.Builder constraintsBuilderRange = new CalendarConstraints.Builder();
         MaterialDatePicker.Builder<Long> builder = MaterialDatePicker.Builder.datePicker();
         builder.setTitleText("Select Date of Birth");
@@ -89,12 +89,20 @@ public class MainActivity extends AppCompatActivity {
         expiryDate.setOnClickListener(v -> picker2.show(getSupportFragmentManager(), picker2.toString()));
         picker2.addOnPositiveButtonClickListener(selection -> expiryDate.setText(picker2.getHeaderText()));
 
+        Button nfcButton = findViewById(R.id.button2);
+        nfcButton.setOnClickListener(view -> {
+            if (birthDate.getText().toString().isEmpty() || expiryDate.getText().toString().isEmpty() || idNumber.getText().toString().isEmpty()) {
+                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_LONG).show();
+            } else {
+                Intent intent = new Intent(this, NfcActivity.class);
+                intent.putExtra("birthDate", birthDate.getText().toString());
+                intent.putExtra("expiryDate", expiryDate.getText().toString());
+                intent.putExtra("idNumber", idNumber.getText().toString());
+                startActivity(intent);
+                }
+        });
 
+        BouncyCastleProvider provider = new BouncyCastleProvider();
+        Security.insertProviderAt(provider,1);
      }
-
-
-
-
-    // open NfcActivity on button click
-
 }

@@ -52,4 +52,12 @@
     <string name="info_scan_ID">Please fill the details below and place your phone on top of the ID.\n\nFollowing information is required to decrypt ID data locally. We do not store, upload or share any of your data. The app is completely open source and available for audit.</string>
     <string name="error_input">Please provide details to read ID</string>
     <string name="error_read">Failed to read ID</string>
+    <string name="result_first_name">\???</string>
+    <string name="result_last_name">\???</string>
+    <string name="result_gender">\???</string>
+    <string name="result_state">\???</string>
+    <string name="result_nationality">\???</string>
+    <string name="result_passive_auth">\???</string>
+    <string name="result_chip_auth">\???</string>
+    <string name="photo">\???</string>
 </resources>
