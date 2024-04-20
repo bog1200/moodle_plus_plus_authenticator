@@ -22,9 +22,6 @@
             android:name=".NfcActivity"
             android:exported="false"
             android:theme="@style/Theme.MAuth">
-            <intent-filter>
-                <action android:name="android.nfc.action.TECH_DISCOVERED" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"

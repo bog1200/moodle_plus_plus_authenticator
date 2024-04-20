@@ -44,11 +44,14 @@ public class MainActivity extends AppCompatActivity {
         EditText birthDate = findViewById(R.id.input_date_of_birth);
         EditText expiryDate = findViewById(R.id.input_expiration_date);
         EditText idNumber = findViewById(R.id.input_passport_number);
+        idNumber.setText("059446346");
         CalendarConstraints.Builder constraintsBuilderRange = new CalendarConstraints.Builder();
         MaterialDatePicker.Builder<Long> builder = MaterialDatePicker.Builder.datePicker();
         builder.setTitleText("Select Date of Birth");
         // limit the date range from 1900 to today
-        builder.setSelection(MaterialDatePicker.todayInUtcMilliseconds());
+        //builder.setSelection(MaterialDatePicker.todayInUtcMilliseconds());
+        //set to 13 Sep 2002
+        builder.setSelection(1031865600000L);
         CalendarConstraints.DateValidator birthDateValidatorMin = DateValidatorPointForward.from(0);
         CalendarConstraints.DateValidator birthDateValidatorMax = DateValidatorPointBackward.before(MaterialDatePicker.todayInUtcMilliseconds());
 
@@ -72,7 +75,9 @@ public class MainActivity extends AppCompatActivity {
 
         CalendarConstraints.Builder constraintsBuilderRange2 = new CalendarConstraints.Builder();
 
-        builder2.setSelection(MaterialDatePicker.todayInUtcMilliseconds());
+        //builder2.setSelection(MaterialDatePicker.todayInUtcMilliseconds());
+        //set to 02 Mar 2031
+        builder2.setSelection(1936003200000L);
         CalendarConstraints.DateValidator expiryDateValidatorMin = DateValidatorPointForward.from(MaterialDatePicker.todayInUtcMilliseconds());
         CalendarConstraints.DateValidator expiryDateValidatorMax = DateValidatorPointBackward.before(MaterialDatePicker.todayInUtcMilliseconds() + 315569520000L);
 
