@@ -1,37 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        tools:context=".NfcActivity"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <LinearLayout
-        android:id="@+id/loading_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="vertical"
-        android:visibility="visible">
-
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/info_loading" />
-
-    </LinearLayout>
-
-    <ScrollView
+ <ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/main_layout"
+        tools:context=".NfcIdReadActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        tools:context=".NFCActivity">
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,22 +23,22 @@
 
             <ImageView
                 android:id="@+id/view_photo"
+                tools:src="@drawable/photo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:contentDescription="@string/photo"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
-                tools:src="@drawable/photo" />
+                android:contentDescription="@string/photo" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:baselineAligned="false"
                 android:divider="@drawable/linear_divider"
                 android:orientation="horizontal"
-                android:showDividers="middle"
-                android:baselineAligned="false">
+                android:showDividers="middle">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -85,31 +64,19 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/result_gender"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/result_state"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:text="@string/result_nationality"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/result_passive_auth"
+                        android:text="@string/result_personal_code"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/result_chip_auth"
+                        android:text="@string/result_valid_until"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                 </LinearLayout>
@@ -125,52 +92,38 @@
 
                     <TextView
                         android:id="@+id/output_first_name"
+                        tools:text="Peter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        tools:text="Peter" />
-
-                    <TextView
-                        android:id="@+id/output_last_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        tools:text="Jackson" />
-
-                    <TextView
-                        android:id="@+id/output_gender"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        tools:text="Male" />
-
-                    <TextView
-                        android:id="@+id/output_state"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        tools:text="NZD" />
-
-                    <TextView
-                        android:id="@+id/output_nationality"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        tools:text="New Zealand" />
-
-                    <TextView
-                        android:id="@+id/output_passive_auth"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:text="No"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                     <TextView
-                        android:id="@+id/output_chip_auth"
+                        android:id="@+id/output_last_name"
+                        tools:text="Jackson"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                    <TextView
+                        android:id="@+id/output_nationality"
+                        tools:text="New Zealand"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                    <TextView
+                        android:id="@+id/output_personal_code"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        tools:text="No" />
+                        tools:text="0000000000" />
+
+                    <TextView
+                        android:id="@+id/output_expiry_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        tools:text="0000000000" />
 
                 </LinearLayout>
 
@@ -178,6 +131,3 @@
 
         </LinearLayout>
     </ScrollView>
-</FrameLayout>
-
-

@@ -2,7 +2,6 @@ package app.romail.mpp_auth;
 
 import android.annotation.SuppressLint;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.nfc.NfcAdapter;
@@ -12,7 +11,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -114,7 +116,7 @@ public class NfcActivity extends AppCompatActivity {
             return;
         }
         else {
-            setContentView(R.layout.activity_nfc);
+            setContentView(R.layout.activity_nfc_processing);
            // textView = findViewById(R.id.textView);
         }
     }
@@ -163,8 +165,15 @@ public class NfcActivity extends AppCompatActivity {
                     Log.e("NFC", "tech: " + tech);
                 }
                 IsoDep isoDep = IsoDep.get(tagFromIntent);
-                NFCReader nfcReader = new NFCReader(isoDep, bacKey);
-                nfcReader.execute();
+                if (isoDep != null) {
+                    TextView textView = findViewById(R.id.textView);
+                    textView.setVisibility(View.GONE);
+                    LinearLayout layout = findViewById(R.id.loading_layout);
+                    layout.setVisibility(View.VISIBLE);
+                    NFCReader nfcReader = new NFCReader(isoDep, bacKey);
+                    nfcReader.execute();
+                }
+
 
             }
         }
@@ -231,6 +240,7 @@ public class NfcActivity extends AppCompatActivity {
                                     PACEInfo.toParameterSpec(((PACEInfo) securityInfo).getParameterId()),
                                     null
                             );
+                            Log.d(TAG, "PACE succeeded");
                             paceSucceeded = true;
                         }
                     }
@@ -291,7 +301,9 @@ public class NfcActivity extends AppCompatActivity {
                 dg14Encoded = IOUtils.toByteArray(dg14In);
                 ByteArrayInputStream dg14InByte = new ByteArrayInputStream(dg14Encoded);
                 dg14File = new DG14File(dg14InByte);
+                Log.d(TAG, "DG14 read");
                 for (SecurityInfo securityInfo : dg14File.getSecurityInfos()) {
+                    Log.d(TAG, "SecurityInfo: " + securityInfo);
                     if (securityInfo instanceof ChipAuthenticationPublicKeyInfo) {
                         service.doEACCA(
                                 ((ChipAuthenticationPublicKeyInfo) securityInfo).getKeyId(),
@@ -372,6 +384,32 @@ public class NfcActivity extends AppCompatActivity {
                 }
             } catch (Exception e) {
                 Log.w(TAG, e);
+            }
+        }
+
+        @Override
+protected void onPostExecute(Exception e) {
+            super.onPostExecute(e);
+            if (e != null) {
+                Log.e(TAG, "Error reading NFC: ", e);
+                Toast.makeText(NfcActivity.this, "Error reading NFC: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                finish();
+            } else {
+                Log.d(TAG, "NFC read successfully");
+                Intent intent = new Intent(NfcActivity.this, NfcIdReadActivity.class);
+               intent.putExtra(NfcIdReadActivity.KEY_FIRST_NAME, dg1File.getMRZInfo().getSecondaryIdentifier().replace("<", " "));
+                intent.putExtra(NfcIdReadActivity.KEY_LAST_NAME, dg1File.getMRZInfo().getPrimaryIdentifier().replace("<", " "));
+                intent.putExtra(NfcIdReadActivity.KEY_DATE_OF_BIRTH, dg1File.getMRZInfo().getDateOfBirth());
+                intent.putExtra(NfcIdReadActivity.KEY_EXP, dg1File.getMRZInfo().getDateOfExpiry());
+                intent.putExtra(NfcIdReadActivity.KEY_DOCUMENT_NUMBER, dg1File.getMRZInfo().getDocumentNumber());
+                intent.putExtra(NfcIdReadActivity.KEY_COUNTRY, dg1File.getMRZInfo().getNationality());
+                intent.putExtra(NfcIdReadActivity.KEY_PIN, dg1File.getMRZInfo().getPersonalNumber());
+                float ratio = (float) (320.0 / bitmap.getHeight());
+                int newWidth = (int) (bitmap.getWidth() * ratio);
+                int newHeight = (int) (bitmap.getHeight() * ratio);
+                Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+                intent.putExtra(NfcIdReadActivity.KEY_IMAGE, scaledBitmap);
+                startActivity(intent);
             }
         }
     }
