@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">M++ Auth</string>
+    <string name="action_settings">Setari</string>
+    <string name="input_ID_number">Numar ID</string>
+    <string name="input_expiration_date">Data expirare</string>
+    <string name="input_date_of_birth">Data nastere</string>
+    <string name="info_loading">Se citesc datele din ID</string>
+    <string name="info_scan_ID">Va rog sa completati toate detaliile de mai jos si sa puneti telefonul deasupra ID-ului dumneavoastra. Aceste informatii sunt necesare pentru citirea ID-ului.</string>
+    <string name="error_input">Va rog sa furnizati detaliile dumneavoastra pentru a citi ID-ul</string>
+    <string name="error_read">Nu s-a putut citi ID-ul dumneavostra</string>
+    <string name="result_first_name">Prenume</string>
+    <string name="result_last_name">Numele de familie</string>
+    <string name="result_nationality">Nationalitate</string>
+    <string name="result_personal_code">Cod postal</string>
+    <string name="result_valid_until">Valabil pana la</string>
+    <string name="photo">Poza</string>
+    <string name="tap_id">Va rugam sa puneti ID-ul dumneavoastra</string>
+    <string name="start_presence_list">Porneste lista de prezenta</string>
+</resources>
