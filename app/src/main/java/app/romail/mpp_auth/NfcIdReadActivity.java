@@ -7,6 +7,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedDispatcher;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DateFormat;
@@ -32,6 +33,7 @@ public class NfcIdReadActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        //OnBackPressedDispatcher onBackPressedDispatcher = getOnBackPressedDispatcher();
         setContentView(R.layout.activity_nfc_results);
         Intent intent = getIntent();
         String firstName = intent.getStringExtra(KEY_FIRST_NAME);
@@ -56,7 +58,8 @@ public class NfcIdReadActivity extends AppCompatActivity {
         TextView pinView = findViewById(R.id.output_personal_code);
         pinView.setText(pin);
         ImageView imageView = findViewById(R.id.view_photo);
-        imageView.setImageBitmap(image);
+        if (image != null) imageView.setImageBitmap(image);
+        else imageView.setImageResource(R.drawable.photo);
         TextView expView = findViewById(R.id.output_expiry_date);
         SimpleDateFormat IdFormat = new SimpleDateFormat("yyMMdd");
         DateFormat outputFormat = DateFormat.getDateInstance();
@@ -72,6 +75,14 @@ public class NfcIdReadActivity extends AppCompatActivity {
        // TextView imageView = findViewById(R.id.output_image);
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+//        super.onBackPressed();
+//        finish();
     }
 
 

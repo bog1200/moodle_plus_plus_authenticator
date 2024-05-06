@@ -44,14 +44,11 @@ public class MainActivity extends AppCompatActivity {
         EditText birthDate = findViewById(R.id.input_date_of_birth);
         EditText expiryDate = findViewById(R.id.input_expiration_date);
         EditText idNumber = findViewById(R.id.input_passport_number);
-        idNumber.setText("059446346");
         CalendarConstraints.Builder constraintsBuilderRange = new CalendarConstraints.Builder();
         MaterialDatePicker.Builder<Long> builder = MaterialDatePicker.Builder.datePicker();
         builder.setTitleText("Select Date of Birth");
         // limit the date range from 1900 to today
         //builder.setSelection(MaterialDatePicker.todayInUtcMilliseconds());
-        //set to 13 Sep 2002
-        builder.setSelection(1031865600000L);
         CalendarConstraints.DateValidator birthDateValidatorMin = DateValidatorPointForward.from(0);
         CalendarConstraints.DateValidator birthDateValidatorMax = DateValidatorPointBackward.before(MaterialDatePicker.todayInUtcMilliseconds());
 
@@ -59,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 new ArrayList<>();
         listValidators.add(birthDateValidatorMin);
         listValidators.add(birthDateValidatorMax);
+
         CalendarConstraints.DateValidator validators = CompositeDateValidator.allOf(listValidators);
         constraintsBuilderRange.setValidator(validators);
 
@@ -76,8 +74,6 @@ public class MainActivity extends AppCompatActivity {
         CalendarConstraints.Builder constraintsBuilderRange2 = new CalendarConstraints.Builder();
 
         //builder2.setSelection(MaterialDatePicker.todayInUtcMilliseconds());
-        //set to 02 Mar 2031
-        builder2.setSelection(1936003200000L);
         CalendarConstraints.DateValidator expiryDateValidatorMin = DateValidatorPointForward.from(MaterialDatePicker.todayInUtcMilliseconds());
         CalendarConstraints.DateValidator expiryDateValidatorMax = DateValidatorPointBackward.before(MaterialDatePicker.todayInUtcMilliseconds() + 315569520000L);
 
@@ -105,6 +101,19 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("idNumber", idNumber.getText().toString());
                 startActivity(intent);
                 }
+        });
+
+        Button demoButton = findViewById(R.id.button3);
+        demoButton.setOnClickListener(view -> {
+            Intent dIntent = new Intent(this, NfcIdReadActivity.class);
+            dIntent.putExtra(NfcIdReadActivity.KEY_FIRST_NAME, "John");
+            dIntent.putExtra(NfcIdReadActivity.KEY_LAST_NAME, "Doe");
+            dIntent.putExtra(NfcIdReadActivity.KEY_DATE_OF_BIRTH, "900101");
+            dIntent.putExtra(NfcIdReadActivity.KEY_EXP, "251231");
+            dIntent.putExtra(NfcIdReadActivity.KEY_DOCUMENT_NUMBER, "123456");
+            dIntent.putExtra(NfcIdReadActivity.KEY_COUNTRY, "ROU");
+            dIntent.putExtra(NfcIdReadActivity.KEY_PIN, "1234567890");
+            startActivity(dIntent);
         });
 
         BouncyCastleProvider provider = new BouncyCastleProvider();

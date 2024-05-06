@@ -125,9 +125,9 @@ public class NfcActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        Log.e("NFC", "onResume");
+        Log.d("NFC", "onResume");
         if (nfcAdapter != null) {
-            Log.e("NFC", "enableForegroundDispatch");
+            Log.d("NFC", "enableForegroundDispatch");
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), PendingIntent.FLAG_MUTABLE);
             String[][] filter = {{"android.nfc.tech.IsoDep"}};
             nfcAdapter.enableForegroundDispatch(this, pendingIntent, null, filter );
@@ -138,9 +138,9 @@ public class NfcActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        Log.e("NFC", "onPause");
+        Log.d("NFC", "onPause");
         if (nfcAdapter != null) {
-            Log.e("NFC", "disableForegroundDispatch");
+            Log.d("NFC", "disableForegroundDispatch");
             nfcAdapter.disableForegroundDispatch(this);
         }
     }
@@ -149,29 +149,31 @@ public class NfcActivity extends AppCompatActivity {
     @Override
     protected void onNewIntent(@NonNull Intent intent) {
         super.onNewIntent(intent);
-        Log.e("NFC", "onNewIntent");
-        Log.e("NFC", "Intent: " + intent.getAction());
+        Log.d("NFC", "onNewIntent");
+        Log.d("NFC", "Intent: " + intent.getAction());
         if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(intent.getAction())) {
-            Log.e("NFC", "ACTION_TECH_DISCOVERED");
+            Log.d("NFC", "ACTION_TECH_DISCOVERED");
             Tag tagFromIntent = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
             if (tagFromIntent == null){
                 Log.e("NFC", "tagFromIntent is null");
                 return;
             }
             else {
-                Log.e("NFC", "tagFromIntent is not null");
+                Log.d("NFC", "tagFromIntent is not null");
                 String[] techList = tagFromIntent.getTechList();
                 for (String tech : techList) {
-                    Log.e("NFC", "tech: " + tech);
+                    Log.d("NFC", "tech: " + tech);
                 }
-                IsoDep isoDep = IsoDep.get(tagFromIntent);
-                if (isoDep != null) {
-                    TextView textView = findViewById(R.id.textView);
-                    textView.setVisibility(View.GONE);
-                    LinearLayout layout = findViewById(R.id.loading_layout);
-                    layout.setVisibility(View.VISIBLE);
-                    NFCReader nfcReader = new NFCReader(isoDep, bacKey);
-                    nfcReader.execute();
+                if (Arrays.asList(techList).contains("android.nfc.tech.IsoDep")) {
+                    IsoDep isoDep = IsoDep.get(tagFromIntent);
+                    if (isoDep != null) {
+                        TextView textView = findViewById(R.id.textView);
+                        textView.setVisibility(View.GONE);
+                        LinearLayout layout = findViewById(R.id.loading_layout);
+                        layout.setVisibility(View.VISIBLE);
+                        NFCReader nfcReader = new NFCReader(isoDep, bacKey);
+                        nfcReader.execute();
+                    }
                 }
 
 
@@ -181,7 +183,7 @@ public class NfcActivity extends AppCompatActivity {
 
 
 
-    @SuppressLint("StaticFieldLeak")
+    @SuppressLint("StaticFieldLeak") //TODO: Add a progress bar
     private class NFCReader extends AsyncTask<Void, Void, Exception> {
         private static final String TAG = "NFCReader";
 
