@@ -10,8 +10,8 @@ android {
         applicationId = "app.romail.mpp_auth"
         minSdk = 28
         targetSdk = 34
-        versionCode = 2
-        versionName = "0.0.2"
+        versionCode = 3
+        versionName = "0.0.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -54,6 +54,7 @@ dependencies {
     implementation(libs.commons.io)
     implementation(libs.scuba.sc.android)
     implementation(libs.bcpkix.jdk15on)
+    implementation(libs.okhttp)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

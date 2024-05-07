@@ -3,17 +3,20 @@ package app.romail.mpp_auth;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.activity.OnBackPressedDispatcher;
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 
 public class NfcIdReadActivity extends AppCompatActivity {
@@ -72,17 +75,35 @@ public class NfcIdReadActivity extends AppCompatActivity {
         }
         expView.setText(outputFormat.format(expDate));
 
-       // TextView imageView = findViewById(R.id.output_image);
+        Intent hceIntent = new Intent(this, HCEService.class);
+        assert country != null;
+        hceIntent.putExtra("loginid", country.concat(idNumber));
+        startService(hceIntent);
+
+        JSONObject documentAPI = HttpRequest.getRequest("https://test-mpp.romail.app:8080/idDocument/idLogin/?country=".concat(country).concat("&pin=").concat(pin));
+        Log.d("IdDocumentAPI", documentAPI.toString());
+        if (documentAPI.has("account_id")){
+            try {
+                JSONObject accountGET = HttpRequest.getRequest("https://test-mpp.romail.app:8080/account/".concat(documentAPI.getString("account_id")));
+                Log.d("AccountAPI", accountGET.toString());
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        else {
+            Toast.makeText(this, "No account found for this ID.", Toast.LENGTH_LONG).show();
+        }
 
 
     }
 
     @Override
+
     public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-//        super.onBackPressed();
-//        finish();
+       super.onBackPressed();
+       finish();
     }
 
 
