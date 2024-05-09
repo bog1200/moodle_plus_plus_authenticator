@@ -55,6 +55,7 @@ dependencies {
     implementation(libs.scuba.sc.android)
     implementation(libs.bcpkix.jdk15on)
     implementation(libs.okhttp)
+    implementation(libs.auth0.jwtdecode)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

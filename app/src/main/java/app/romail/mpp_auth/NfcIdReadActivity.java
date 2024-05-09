@@ -1,6 +1,7 @@
 package app.romail.mpp_auth;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
@@ -75,20 +76,23 @@ public class NfcIdReadActivity extends AppCompatActivity {
         }
         expView.setText(outputFormat.format(expDate));
 
-        Intent hceIntent = new Intent(this, HCEService.class);
-        assert country != null;
-        hceIntent.putExtra("loginid", country.concat(idNumber));
-        startService(hceIntent);
+        // if device supports host card emulation, start HCE service
+        PackageManager packageManager = this.getPackageManager();
+        if (packageManager.hasSystemFeature(PackageManager.FEATURE_NFC_HOST_CARD_EMULATION)) {
+            Intent hceIntent = new Intent(this, HCEService.class);
+            assert country != null;
+            hceIntent.putExtra("loginid", country.concat(idNumber));
+            startService(hceIntent);
+        }
+        else {
+            Toast.makeText(this, "This device does not support NFC Host Card Emulation.", Toast.LENGTH_LONG).show();
+        }
 
-        JSONObject documentAPI = HttpRequest.getRequest("https://test-mpp.romail.app:8080/idDocument/idLogin/?country=".concat(country).concat("&pin=").concat(pin));
-        Log.d("IdDocumentAPI", documentAPI.toString());
-        if (documentAPI.has("account_id")){
-            try {
-                JSONObject accountGET = HttpRequest.getRequest("https://test-mpp.romail.app:8080/account/".concat(documentAPI.getString("account_id")));
-                Log.d("AccountAPI", accountGET.toString());
-            } catch (JSONException e) {
-                throw new RuntimeException(e);
-            }
+        boolean loggedIn = HttpRequest.IdAuthRequest(country, pin);
+        if (loggedIn){
+            Long account = HttpRequest.getAccountFromToken();
+            JSONObject accountGET = HttpRequest.GetRequest("https://test-mpp.romail.app:8080/api/v1/account/".concat(String.valueOf(account)));
+            Log.d("AccountAPI", accountGET.toString());
         }
         else {
             Toast.makeText(this, "No account found for this ID.", Toast.LENGTH_LONG).show();
