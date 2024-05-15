@@ -56,6 +56,7 @@ dependencies {
     implementation(libs.bcpkix.jdk15on)
     implementation(libs.okhttp)
     implementation(libs.auth0.jwtdecode)
+    implementation("dev.samstevens.totp:totp:1.7.1")
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

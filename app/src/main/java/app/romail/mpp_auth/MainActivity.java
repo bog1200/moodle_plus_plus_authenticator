@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -49,6 +50,20 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         Toast.makeText(this, "Welcome " + accessToken.getSubject(), Toast.LENGTH_LONG).show();
+
+        Button totpButton = findViewById(R.id.totpButton);
+        totpButton.setOnClickListener(v -> {
+            Intent totpIntent = new Intent(this, TotpActivity.class);
+            startActivity(totpIntent);
+        });
+        Button logoutButton = findViewById(R.id.logoutButton);
+        logoutButton.setOnClickListener(v -> {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.remove("accessToken");
+            editor.remove("refreshToken");
+            editor.apply();
+            startActivity(loginIntent);
+        });
 
 
 
