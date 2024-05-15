@@ -6,13 +6,13 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
@@ -87,24 +87,30 @@ public class NfcIdReadActivity extends AppCompatActivity {
         else {
             Toast.makeText(this, "This device does not support NFC Host Card Emulation.", Toast.LENGTH_LONG).show();
         }
-
-        boolean loggedIn = HttpRequest.IdAuthRequest(country, pin);
-        if (loggedIn){
-            Long account = HttpRequest.getAccountFromToken();
-            JSONObject accountGET = HttpRequest.GetRequest("https://test-mpp.romail.app:8080/api/v1/account/".concat(String.valueOf(account)));
-            Log.d("AccountAPI", accountGET.toString());
-        }
-        else {
-            Toast.makeText(this, "No account found for this ID.", Toast.LENGTH_LONG).show();
-        }
+        Button loginButton = findViewById(R.id.loginButton);
+        loginButton.setOnClickListener(view -> {
+            boolean loggedIn = HttpRequest.IdAuthRequest(this, country, pin);
+            if (loggedIn){
+                Long account = HttpRequest.getAccountFromToken(this);
 
 
+
+                JSONObject accountGET = HttpRequest.GetRequest(this,"https://mpp.romail.app/api/v1/account/".concat(String.valueOf(account)));
+                Log.d("AccountAPI", accountGET.toString());
+                Intent accountIntent = new Intent(this, MainActivity.class);
+                startActivity(accountIntent);
+
+            }
+            else {
+                Toast.makeText(this, "No account found for this ID.", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
 
     public void onBackPressed() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
        super.onBackPressed();
        finish();

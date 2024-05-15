@@ -86,7 +86,7 @@ public class NfcActivity extends AppCompatActivity {
         String birthDateString;
         String expiryDateString;
         if (intent.getStringExtra("birthDate") == null || intent.getStringExtra("expiryDate") == null || intent.getStringExtra("idNumber") == null) {
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, LoginActivity.class));
         }
         try {
            Date birthDate = originalFormat.parse(Objects.requireNonNull(intent.getStringExtra("birthDate")));
