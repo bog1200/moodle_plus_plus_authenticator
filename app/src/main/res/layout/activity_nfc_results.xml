@@ -129,11 +129,16 @@
 
             </LinearLayout>
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
             <Button
                 android:id="@+id/loginButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:backgroundTint="#001C27"
                 android:text="Login" />
 
         </LinearLayout>
