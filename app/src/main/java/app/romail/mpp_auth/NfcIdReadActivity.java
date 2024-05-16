@@ -1,5 +1,6 @@
 package app.romail.mpp_auth;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONObject;
@@ -107,13 +109,19 @@ public class NfcIdReadActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("MissingSuperCall")
     @Override
-
     public void onBackPressed() {
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-       super.onBackPressed();
-       finish();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Do you want to cancel the login?");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+            //exit
+            finish();
+        });
+        builder.setNegativeButton("No", (dialog, which) -> {
+            dialog.cancel();
+        });
     }
 
 

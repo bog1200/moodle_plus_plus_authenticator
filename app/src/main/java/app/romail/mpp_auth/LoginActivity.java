@@ -1,5 +1,6 @@
 package app.romail.mpp_auth;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
@@ -8,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -120,4 +122,6 @@ public class LoginActivity extends AppCompatActivity {
         BouncyCastleProvider provider = new BouncyCastleProvider();
         Security.insertProviderAt(provider,1);
      }
+
+
 }
