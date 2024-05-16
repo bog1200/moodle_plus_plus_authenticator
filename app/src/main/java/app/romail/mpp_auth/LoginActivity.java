@@ -107,13 +107,13 @@ public class LoginActivity extends AppCompatActivity {
         Button demoButton = findViewById(R.id.button3);
         demoButton.setOnClickListener(view -> {
             Intent dIntent = new Intent(this, NfcIdReadActivity.class);
-            dIntent.putExtra(NfcIdReadActivity.KEY_FIRST_NAME, "John");
+            dIntent.putExtra(NfcIdReadActivity.KEY_FIRST_NAME, "Jane");
             dIntent.putExtra(NfcIdReadActivity.KEY_LAST_NAME, "Doe");
             dIntent.putExtra(NfcIdReadActivity.KEY_DATE_OF_BIRTH, "900101");
             dIntent.putExtra(NfcIdReadActivity.KEY_EXP, "251231");
             dIntent.putExtra(NfcIdReadActivity.KEY_DOCUMENT_NUMBER, "123456");
             dIntent.putExtra(NfcIdReadActivity.KEY_COUNTRY, "ROU");
-            dIntent.putExtra(NfcIdReadActivity.KEY_PIN, "1234567890");
+            dIntent.putExtra(NfcIdReadActivity.KEY_PIN, "1234567891");
             startActivity(dIntent);
         });
 

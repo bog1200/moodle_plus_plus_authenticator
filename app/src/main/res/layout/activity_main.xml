@@ -41,6 +41,17 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/subjectsButton"
+        android:backgroundTint="#001C27"
+        android:text="Get Subjects"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/logoutButton"
         android:backgroundTint="#001C27"
         android:text="Log Out"/>

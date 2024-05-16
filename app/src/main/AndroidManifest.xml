@@ -40,6 +40,11 @@
             android:theme="@style/Theme.MAuth">
         </activity>
         <activity
+            android:name=".SubjectListActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MAuth">
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.MAuth">

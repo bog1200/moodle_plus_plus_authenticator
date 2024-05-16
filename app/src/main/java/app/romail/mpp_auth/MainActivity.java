@@ -65,6 +65,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(loginIntent);
         });
 
+        Button subjectsButton = findViewById(R.id.subjectsButton);
+        subjectsButton.setOnClickListener(v -> {
+            Intent subjectsIntent = new Intent(this, SubjectListActivity.class);
+            startActivity(subjectsIntent);
+        });
+
+
 
 
 

@@ -38,12 +38,12 @@ public class TotpActivity extends AppCompatActivity {
         Log.d("TotpActivity", "onCreate: ");
         Long userId = HttpRequest.getAccountFromToken(this);
 
-        JSONObject account = HttpRequest.GetRequest(this, "https://mpp.romail.app/api/v1/account/"+userId);
+        JSONObject account = HttpRequest.GetRequest(this, "/account/"+userId);
         TextView name = findViewById(R.id.totpName);
         TextView totp = findViewById(R.id.totpCode);
         ProgressBar progressBar = findViewById(R.id.totpProgressBar);
 
-        JSONObject totpObject = HttpRequest.GetRequest(this, "https://mpp.romail.app/api/v1/account/me/accountSecret");
+        JSONObject totpObject = HttpRequest.GetRequest(this, "/account/me/accountSecret");
         try {
             name.setText(account.getString("username"));
            // surname.setText(account.getString("surname"));
