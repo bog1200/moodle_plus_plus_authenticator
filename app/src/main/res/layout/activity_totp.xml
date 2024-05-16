@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/totp_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center">
 
+        <ImageView
+            android:id="@+id/logo_new"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/logo_new" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
 
         <TextView
             android:id="@+id/totpLabelName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Username: "
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -20,27 +34,38 @@
             android:id="@+id/totpName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:tooltipText="TextView"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
         <TextView
             android:id="@+id/totpText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your code is: " />
+            android:text="Your code is: "
+            android:textSize="20sp"     />
 
         <TextView
             android:id="@+id/totpCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:tooltipText="TextView"
+            android:textSize="20sp"     />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
 
         <ProgressBar
             android:id="@+id/totpProgressBar"
             style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="350dp"
+            android:layout_height="20dp" />
     </LinearLayout>
