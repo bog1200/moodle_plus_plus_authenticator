@@ -27,7 +27,7 @@ public class CourseDetailsActivity extends AppCompatActivity implements CourseDe
         Intent intent = getIntent();
         String courseId = String.valueOf(intent.getIntExtra("courseId",0));
 
-        JSONArray attendances = HttpRequest.GetRequestArray(this, "courses/attendance/course/"+courseId);
+        JSONArray attendances = HttpRequest.GetRequestArray(this, "/courses/attendance/course/"+courseId);
         if (attendances.length() == 0) {
             // No courses found
             return;

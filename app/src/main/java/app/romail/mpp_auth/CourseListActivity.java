@@ -47,8 +47,8 @@ public class CourseListActivity extends AppCompatActivity implements CourseListA
     public void onItemClick(View view, int position) {
         Toast.makeText(this, "You clicked " + position, Toast.LENGTH_SHORT).show();
         //TODO: Add course details activity, where you can see the attendance and other details, also start the attendance (send the request to start the attendance)
-        //Intent intent = new Intent(this, CourseDetailsActivity.class);
-        //intent.putExtra("courseId", position);
-        //startActivity(intent);
+        Intent intent = new Intent(this, CourseDetailsActivity.class);
+        intent.putExtra("courseId", position);
+        startActivity(intent);
     }
 }

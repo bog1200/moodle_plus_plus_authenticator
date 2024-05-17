@@ -14,6 +14,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Timestamp;
+
 public class CourseDetailsAdapter extends RecyclerView.Adapter<CourseDetailsAdapter.ViewHolder> {
 
     private final JSONArray localDataSet;
@@ -34,11 +36,13 @@ public class CourseDetailsAdapter extends RecyclerView.Adapter<CourseDetailsAdap
 
 //        private final CardView cardView;
 
-//        private final TextView courseName;
-//        private final TextView courseDescription;
-//        private final TextView courseCode;
-//
-//        private final TableRow tableRow;
+        private final TextView firstName;
+
+        private final TextView lastName;
+        private final TextView attendanceDate;
+
+        private final TableRow tableRow;
+        private final TextView textView;
 
         public ViewHolder(View view) {
             super(view);
@@ -46,12 +50,12 @@ public class CourseDetailsAdapter extends RecyclerView.Adapter<CourseDetailsAdap
             Log.d("ViewHolder", "ViewHolder: ");
             Log.d("ViewHolder", "ViewHolder: "+ view);
 
-//            courseName = view.findViewById(R.id.courseName);
-//            courseDescription = view.findViewById(R.id.courseDescription);
-//            courseCode = view.findViewById(R.id.courseCode);
-//            tableRow = view.findViewById(R.id.subjectsTable);
-//            tableRow.setOnClickListener(this);
-            //textView = (TextView) view.findViewById(R.id.textView);
+            textView = view.findViewById(R.id.textView);
+            firstName = view.findViewById(R.id.firstName);
+            lastName = view.findViewById(R.id.lastName);
+            attendanceDate = view.findViewById(R.id.attendanceDate);
+            tableRow = view.findViewById(R.id.attendanceTable);
+            tableRow.setOnClickListener(this);
 //            cardView = (CardView) view.findViewById(R.id.cardView);
 //            cardView.setOnClickListener(this);
         }
@@ -60,6 +64,24 @@ public class CourseDetailsAdapter extends RecyclerView.Adapter<CourseDetailsAdap
 //            return cardView;
 //        }
 
+        public TextView getTextView() {
+            return textView;
+        }
+
+        public TextView getFirstName() {
+            return firstName;
+        }
+
+        public TextView getLastName() {
+            return lastName;
+        }
+        public TextView getAttendanceDate() {
+            return attendanceDate;
+        }
+
+        public TableRow getTableRow() {
+            return tableRow;
+        }
 
         @Override
         public void onClick(View v) {
@@ -104,10 +126,10 @@ public class CourseDetailsAdapter extends RecyclerView.Adapter<CourseDetailsAdap
         // contents of the view with that element
         try {
             JSONObject attendance = localDataSet.getJSONObject(position);
-//            viewHolder.getCourseName().setText(course.getString("name"));
-//            viewHolder.getCourseDescription().setText(course.getString("description"));
-//            viewHolder.getCourseCode().setText(course.getString("code"));
-
+            viewHolder.getFirstName().setText(attendance.getString("firstName"));
+            viewHolder.getLastName().setText(attendance.getString("lastName"));
+            Timestamp timestamp = new Timestamp(attendance.getLong("attendanceDate"));
+            viewHolder.getAttendanceDate().setText(timestamp.toString());
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
