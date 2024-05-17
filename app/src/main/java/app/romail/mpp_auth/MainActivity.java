@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //TODO: else button that starts the student attendance HCE
+        //TODO EXTRA: Show the attendance status of the student
 
 
 

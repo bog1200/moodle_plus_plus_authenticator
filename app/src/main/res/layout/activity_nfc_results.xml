@@ -138,6 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:textColor="@color/button_text_color"
                 android:backgroundTint="#001C27"
 
                 android:text="Login" />
