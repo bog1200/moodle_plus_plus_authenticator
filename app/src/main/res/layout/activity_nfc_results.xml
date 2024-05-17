@@ -132,7 +132,7 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="30dp" />
-
+            <!-- android:textColor="@color/button_text_color" -->
             <Button
                 android:id="@+id/loginButton"
                 android:layout_width="wrap_content"

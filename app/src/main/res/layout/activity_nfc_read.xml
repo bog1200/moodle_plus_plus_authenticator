@@ -112,10 +112,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="#001C27"
-                    android:layout_marginRight="130dp"
+                    android:layout_marginRight="120dp"
                     android:textColor="@color/button_text_color"
                     android:text="NFC Read" />
-
+                <!-- android:textColor="@color/button_text_color" -->
                 <Button
                     android:id="@+id/button3"
                     android:layout_width="wrap_content"
