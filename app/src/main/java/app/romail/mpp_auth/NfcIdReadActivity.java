@@ -83,7 +83,7 @@ public class NfcIdReadActivity extends AppCompatActivity {
         if (packageManager.hasSystemFeature(PackageManager.FEATURE_NFC_HOST_CARD_EMULATION)) {
             Intent hceIntent = new Intent(this, HCEService.class);
             assert country != null;
-            hceIntent.putExtra("loginid", country.concat(idNumber));
+            hceIntent.putExtra("ndefMessage", country.concat(idNumber));
             startService(hceIntent);
         }
         else {
