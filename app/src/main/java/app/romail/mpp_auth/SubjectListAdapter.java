@@ -20,7 +20,7 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
     private ItemClickListener listener;
 
     public interface ItemClickListener {
-        void onItemClick(View view, int position);
+        void onItemClick(View view, int position, String subjectName);
     }
     public void setClickListener(ItemClickListener itemClickListener) {
         this.listener = itemClickListener;
@@ -81,7 +81,7 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
             if (listener != null) {
                 try {
                     JSONObject subject = localDataSet.getJSONObject(getAdapterPosition());
-                    listener.onItemClick(v, subject.getInt("id"));
+                    listener.onItemClick(v, subject.getInt("id"), subject.getString("name"));
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }

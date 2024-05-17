@@ -4,6 +4,28 @@
     android:orientation="vertical">
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Course name"
+        android:textSize="24sp"
+        android:id="@+id/subjectName"
+        android:textStyle="bold"
+        android:padding="10dp" />
+
+   <Button
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="Start new attendance list"
+       android:id="@+id/startAttendanceButton"
+       android:layout_margin="16dp"
+       android:textColor="@color/button_text_color"
+       android:backgroundTint="#001C27"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+    <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

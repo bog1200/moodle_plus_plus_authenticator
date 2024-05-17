@@ -17,6 +17,8 @@ import java.util.Objects;
 
 public class CourseListActivity extends AppCompatActivity implements CourseListAdapter.ItemClickListener {
 
+    String subjectName;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +26,7 @@ public class CourseListActivity extends AppCompatActivity implements CourseListA
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
         String subjectId = String.valueOf(intent.getIntExtra("subjectId",0));
+        subjectName = intent.getStringExtra("subjectName");
 
         JSONArray subjects = HttpRequest.GetRequestArray(this, "/course/getBySubject/"+subjectId);
         if (subjects.length() == 0) {
@@ -49,6 +52,7 @@ public class CourseListActivity extends AppCompatActivity implements CourseListA
         //TODO: Add course details activity, where you can see the attendance and other details, also start the attendance (send the request to start the attendance)
         Intent intent = new Intent(this, CourseDetailsActivity.class);
         intent.putExtra("courseId", position);
+        intent.putExtra("subjectName", subjectName);
         startActivity(intent);
     }
 }

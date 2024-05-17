@@ -43,10 +43,11 @@ public class SubjectListActivity extends AppCompatActivity implements SubjectLis
     }
 
     @Override
-    public void onItemClick(View view, int position) {
+    public void onItemClick(View view, int position, String subjectName) {
         Toast.makeText(this, "You clicked " + position, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, CourseListActivity.class);
         intent.putExtra("subjectId", position);
+        intent.putExtra("subjectName", subjectName);
         startActivity(intent);
         finish();
     }

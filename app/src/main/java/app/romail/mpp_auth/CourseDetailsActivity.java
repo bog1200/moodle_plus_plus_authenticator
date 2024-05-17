@@ -3,6 +3,7 @@ package app.romail.mpp_auth;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +27,10 @@ public class CourseDetailsActivity extends AppCompatActivity implements CourseDe
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
         String courseId = String.valueOf(intent.getIntExtra("courseId",0));
+        String subjectName = intent.getStringExtra("subjectName");
+
+        TextView subjectNameView = findViewById(R.id.subjectName);
+        subjectNameView.setText(subjectName);
 
         JSONArray attendances = HttpRequest.GetRequestArray(this, "/courses/attendance/course/"+courseId);
         if (attendances.length() == 0) {
