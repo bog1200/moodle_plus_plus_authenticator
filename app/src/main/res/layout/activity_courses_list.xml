@@ -7,7 +7,7 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Subjects available"
+        android:text="Details of courses "
         android:textSize="24sp"
         android:textStyle="bold"
         android:gravity="center"
@@ -26,21 +26,21 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Name"
+                android:text="Start date"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:layout_weight="1" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Description"
+                android:text="End date"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:layout_weight="1" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Code"
+                android:text="Nr. of students"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:layout_weight="1" />
 
@@ -49,9 +49,8 @@
     </TableLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/subjectsList"
+        android:id="@+id/coursesList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
-
 </LinearLayout>

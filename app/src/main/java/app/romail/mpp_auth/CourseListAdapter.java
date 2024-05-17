@@ -13,7 +13,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.ViewHolder> {
+import java.sql.Timestamp;
+
+public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.ViewHolder> {
 
     private JSONArray localDataSet;
     private ItemClickListener listener;
@@ -33,11 +35,12 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
 
 //        private final CardView cardView;
 
-        private final TextView courseName;
-        private final TextView courseDescription;
-        private final TextView courseCode;
+        private final TextView startDate;
+        private final TextView endDate;
+        private final TextView courseAttendances_ids;
 
         private final TableRow tableRow;
+        private final TextView textView;
 
         public ViewHolder(View view) {
             super(view);
@@ -45,34 +48,38 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
             Log.d("ViewHolder", "ViewHolder: ");
             Log.d("ViewHolder", "ViewHolder: "+view.toString());
 
-            courseName = (TextView) view.findViewById(R.id.courseName);
-            courseDescription = (TextView) view.findViewById(R.id.courseDescription);
-            courseCode = (TextView) view.findViewById(R.id.courseCode);
-            tableRow = (TableRow) view.findViewById(R.id.subjectsTable);
+            textView = (TextView) view.findViewById(R.id.textView);
+            startDate = (TextView) view.findViewById(R.id.startDate);
+            endDate = (TextView) view.findViewById(R.id.endDate);
+            courseAttendances_ids = (TextView) view.findViewById(R.id.courseAttendances_ids);
+            tableRow = (TableRow) view.findViewById(R.id.coursesTable);
             tableRow.setOnClickListener(this);
-            //textView = (TextView) view.findViewById(R.id.textView);
 //            cardView = (CardView) view.findViewById(R.id.cardView);
 //            cardView.setOnClickListener(this);
+        }
+
+        public TextView getTextView() {
+            return textView;
         }
 
 //        public CardView getCardView() {
 //            return cardView;
 //        }
 
-        public TextView getCourseName() {
-            return courseName;
-        }
-
-        public TextView getCourseDescription() {
-            return courseDescription;
-        }
-
-        public TextView getCourseCode() {
-            return courseCode;
-        }
-
         public TableRow getTableRow() {
             return tableRow;
+        }
+
+        public TextView getStartDate() {
+            return startDate;
+        }
+
+        public TextView getEndDate() {
+            return endDate;
+        }
+
+        public TextView getCourseAttendances_ids() {
+            return courseAttendances_ids;
         }
 
         @Override
@@ -87,7 +94,7 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
             }
         }
     }
-    
+
 
     /**
      * Initialize the dataset of the Adapter
@@ -95,7 +102,7 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
      * @param dataSet String[] containing the data to populate views to be used
      * by RecyclerView
      */
-    public SubjectListAdapter(JSONArray dataSet) {
+    public CourseListAdapter(JSONArray dataSet) {
         localDataSet = dataSet;
     }
 
@@ -104,7 +111,7 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.subjects_row_item, viewGroup, false);
+                .inflate(R.layout.courses_row_item, viewGroup, false);
 
         return new ViewHolder(view);
     }
@@ -112,15 +119,17 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        Log.d("SubjectListAdapter", "onBindViewHolder called for position "+position);
+
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         try {
             JSONObject course = localDataSet.getJSONObject(position);
-            viewHolder.courseName.setText(course.getString("name"));
-            viewHolder.courseDescription.setText(course.getString("description"));
-            viewHolder.courseCode.setText(course.getString("code"));
-
+            Timestamp startT = new Timestamp(course.getLong("startDate"));
+            Timestamp endT = new Timestamp(course.getLong("endDate"));
+            viewHolder.getStartDate().setText(startT.toString());
+            viewHolder.getEndDate().setText(endT.toString());
+            int count = course.getJSONArray("courseAttendances_ids").length();
+            viewHolder.getCourseAttendances_ids().setText(String.valueOf(count));
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
