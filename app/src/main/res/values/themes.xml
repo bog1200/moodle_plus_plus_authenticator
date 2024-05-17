@@ -8,6 +8,5 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
     </style>
-    <color name="button_text_color">#FFFFFF</color>
     <style name="Theme.MAuth" parent="Base.Theme.MAuth" />
 </resources>

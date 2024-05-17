@@ -81,6 +81,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
+
     @SuppressLint("MissingSuperCall")
     @Override
     public void onBackPressed() {
@@ -91,9 +94,7 @@ public class MainActivity extends AppCompatActivity {
           //exit
             finishAffinity();
         });
-        builder.setNegativeButton("No", (dialog, which) -> {
-            dialog.cancel();
-        });
+        builder.setNegativeButton("No", (dialog, which) -> dialog.cancel());
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }

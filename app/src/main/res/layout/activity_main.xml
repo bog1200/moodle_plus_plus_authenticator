@@ -32,7 +32,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/totpButton"
         android:backgroundTint="#001C27"
-        android:textColor="@color/button_text_color"
         android:text="Generate TOTP"/>
 
     <Space
@@ -44,7 +43,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/subjectsButton"
         android:backgroundTint="#001C27"
-        android:textColor="@color/button_text_color"
         android:text="Get Subjects"/>
 
     <Space
@@ -56,7 +54,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/logoutButton"
         android:backgroundTint="#001C27"
-        android:textColor="@color/button_text_color"
         android:text="Log Out"/>
 
     <Space

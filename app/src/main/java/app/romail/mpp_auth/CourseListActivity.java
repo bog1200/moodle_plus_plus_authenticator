@@ -15,15 +15,17 @@ import org.json.JSONArray;
 
 import java.util.Objects;
 
-public class SubjectListActivity extends AppCompatActivity implements SubjectListAdapter.ItemClickListener {
+public class CourseListActivity extends AppCompatActivity implements SubjectListAdapter.ItemClickListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subjects_list);
         // Get the Intent that started this activity and extract the string
-        String teacherId = HttpRequest.getAccountFromToken(this).toString();
-         JSONArray subjects = HttpRequest.GetRequestArray(this, "/subject/teacher/"+teacherId);
+        Intent intent = getIntent();
+        String subjectId = String.valueOf(intent.getIntExtra("subjectId",0));
+
+         JSONArray subjects = HttpRequest.GetRequestArray(this, "/course/getBySubject/"+subjectId);
          if (subjects.length() == 0) {
              // No subjects found
              return;
@@ -45,9 +47,5 @@ public class SubjectListActivity extends AppCompatActivity implements SubjectLis
     @Override
     public void onItemClick(View view, int position) {
         Toast.makeText(this, "You clicked " + position, Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, CourseListActivity.class);
-        intent.putExtra("subjectId", position);
-        startActivity(intent);
-        finish();
     }
 }
