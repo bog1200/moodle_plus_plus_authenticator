@@ -4,9 +4,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TableRow;
 import android.widget.TextView;
 
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
@@ -31,8 +31,13 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
      */
     public class ViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener {
 
-        private final CardView cardView;
-        private final TextView textView;
+//        private final CardView cardView;
+
+        private final TextView courseName;
+        private final TextView courseDescription;
+        private final TextView courseCode;
+
+        private final TableRow tableRow;
 
         public ViewHolder(View view) {
             super(view);
@@ -40,17 +45,34 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
             Log.d("ViewHolder", "ViewHolder: ");
             Log.d("ViewHolder", "ViewHolder: "+view.toString());
 
-            textView = (TextView) view.findViewById(R.id.textView);
-            cardView = (CardView) view.findViewById(R.id.cardView);
-            cardView.setOnClickListener(this);
+            courseName = (TextView) view.findViewById(R.id.courseName);
+            courseDescription = (TextView) view.findViewById(R.id.courseDescription);
+            courseCode = (TextView) view.findViewById(R.id.courseCode);
+            tableRow = (TableRow) view.findViewById(R.id.subjectsTable);
+            tableRow.setOnClickListener(this);
+            //textView = (TextView) view.findViewById(R.id.textView);
+//            cardView = (CardView) view.findViewById(R.id.cardView);
+//            cardView.setOnClickListener(this);
         }
 
-        public TextView getTextView() {
-            return textView;
+//        public CardView getCardView() {
+//            return cardView;
+//        }
+
+        public TextView getCourseName() {
+            return courseName;
         }
 
-        public CardView getCardView() {
-            return cardView;
+        public TextView getCourseDescription() {
+            return courseDescription;
+        }
+
+        public TextView getCourseCode() {
+            return courseCode;
+        }
+
+        public TableRow getTableRow() {
+            return tableRow;
         }
 
         @Override
@@ -65,6 +87,7 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
             }
         }
     }
+    
 
     /**
      * Initialize the dataset of the Adapter
@@ -89,11 +112,14 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-
+        Log.d("SubjectListAdapter", "onBindViewHolder called for position "+position);
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         try {
-            viewHolder.getTextView().setText(localDataSet.get(position).toString());
+            JSONObject course = localDataSet.getJSONObject(position);
+            viewHolder.courseName.setText(course.getString("name"));
+            viewHolder.courseDescription.setText(course.getString("description"));
+            viewHolder.courseCode.setText(course.getString("code"));
 
         } catch (JSONException e) {
             throw new RuntimeException(e);

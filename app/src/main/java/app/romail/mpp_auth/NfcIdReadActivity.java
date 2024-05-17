@@ -97,7 +97,7 @@ public class NfcIdReadActivity extends AppCompatActivity {
 
 
 
-                JSONObject accountGET = HttpRequest.GetRequest(this,"https://mpp.romail.app/api/v1/account/".concat(String.valueOf(account)));
+                JSONObject accountGET = HttpRequest.GetRequest(this,"/account/".concat(String.valueOf(account)));
                 Log.d("AccountAPI", accountGET.toString());
                 Intent accountIntent = new Intent(this, MainActivity.class);
                 startActivity(accountIntent);

@@ -4,14 +4,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TableRow;
 import android.widget.TextView;
 
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.sql.Timestamp;
 
 public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.ViewHolder> {
 
@@ -31,7 +33,13 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Vi
      */
     public class ViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener {
 
-        private final CardView cardView;
+//        private final CardView cardView;
+
+        private final TextView startDate;
+        private final TextView endDate;
+        private final TextView courseAttendances_ids;
+
+        private final TableRow tableRow;
         private final TextView textView;
 
         public ViewHolder(View view) {
@@ -41,16 +49,37 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Vi
             Log.d("ViewHolder", "ViewHolder: "+view.toString());
 
             textView = (TextView) view.findViewById(R.id.textView);
-            cardView = (CardView) view.findViewById(R.id.cardView);
-            cardView.setOnClickListener(this);
+            startDate = (TextView) view.findViewById(R.id.startDate);
+            endDate = (TextView) view.findViewById(R.id.endDate);
+            courseAttendances_ids = (TextView) view.findViewById(R.id.courseAttendances_ids);
+            tableRow = (TableRow) view.findViewById(R.id.coursesTable);
+            tableRow.setOnClickListener(this);
+//            cardView = (CardView) view.findViewById(R.id.cardView);
+//            cardView.setOnClickListener(this);
         }
 
         public TextView getTextView() {
             return textView;
         }
 
-        public CardView getCardView() {
-            return cardView;
+//        public CardView getCardView() {
+//            return cardView;
+//        }
+
+        public TableRow getTableRow() {
+            return tableRow;
+        }
+
+        public TextView getStartDate() {
+            return startDate;
+        }
+
+        public TextView getEndDate() {
+            return endDate;
+        }
+
+        public TextView getCourseAttendances_ids() {
+            return courseAttendances_ids;
         }
 
         @Override
@@ -81,7 +110,7 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Vi
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.subjects_row_item, viewGroup, false);
+                .inflate(R.layout.courses_row_item, viewGroup, false);
 
         return new ViewHolder(view);
     }
@@ -93,8 +122,13 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Vi
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         try {
-            viewHolder.getTextView().setText(localDataSet.get(position).toString());
-
+            JSONObject course = localDataSet.getJSONObject(position);
+            Timestamp startT = new Timestamp(course.getLong("startDate"));
+            Timestamp endT = new Timestamp(course.getLong("endDate"));
+            viewHolder.getStartDate().setText(startT.toString());
+            viewHolder.getEndDate().setText(endT.toString());
+            int count = course.getJSONArray("courseAttendances_ids").length();
+            viewHolder.getCourseAttendances_ids().setText(String.valueOf(count));
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }

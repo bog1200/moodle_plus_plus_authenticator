@@ -23,14 +23,14 @@ public class SubjectListActivity extends AppCompatActivity implements SubjectLis
         setContentView(R.layout.activity_subjects_list);
         // Get the Intent that started this activity and extract the string
         String teacherId = HttpRequest.getAccountFromToken(this).toString();
-         JSONArray subjects = HttpRequest.GetRequestArray(this, "/subject/teacher/"+teacherId);
-         if (subjects.length() == 0) {
-             // No subjects found
-             return;
-         }
-            // Display the subjects
+        JSONArray subjects = HttpRequest.GetRequestArray(this, "/subject/teacher/"+teacherId);
+        if (subjects.length() == 0) {
+            // No subjects found
+            return;
+        }
+        // Display the subjects
         RecyclerView recyclerView = findViewById(R.id.subjectsList);
-         SubjectListAdapter customAdapter = new SubjectListAdapter(subjects);
+        SubjectListAdapter customAdapter = new SubjectListAdapter(subjects);
         recyclerView.setAdapter(customAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
