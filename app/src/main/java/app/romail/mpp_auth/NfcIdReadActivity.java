@@ -69,8 +69,7 @@ public class NfcIdReadActivity extends AppCompatActivity {
         TextView expView = findViewById(R.id.output_expiry_date);
         SimpleDateFormat IdFormat = new SimpleDateFormat("yyMMdd");
         DateFormat outputFormat = DateFormat.getDateInstance();
-        String expDateString;
-        Date expDate = null;
+        Date expDate;
         try {
             expDate = IdFormat.parse(exp);
         } catch (ParseException e) {

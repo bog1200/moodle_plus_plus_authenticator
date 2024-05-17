@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
@@ -17,7 +18,7 @@ import java.sql.Timestamp;
 
 public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.ViewHolder> {
 
-    private JSONArray localDataSet;
+    private final JSONArray localDataSet;
     private ItemClickListener listener;
 
     public interface ItemClickListener {
@@ -46,13 +47,13 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Vi
             super(view);
             // Define click listener for the ViewHolder's View
             Log.d("ViewHolder", "ViewHolder: ");
-            Log.d("ViewHolder", "ViewHolder: "+view.toString());
+            Log.d("ViewHolder", "ViewHolder: "+ view);
 
-            textView = (TextView) view.findViewById(R.id.textView);
-            startDate = (TextView) view.findViewById(R.id.startDate);
-            endDate = (TextView) view.findViewById(R.id.endDate);
-            courseAttendances_ids = (TextView) view.findViewById(R.id.courseAttendances_ids);
-            tableRow = (TableRow) view.findViewById(R.id.coursesTable);
+            textView = view.findViewById(R.id.textView);
+            startDate = view.findViewById(R.id.startDate);
+            endDate = view.findViewById(R.id.endDate);
+            courseAttendances_ids = view.findViewById(R.id.courseAttendances_ids);
+            tableRow = view.findViewById(R.id.coursesTable);
             tableRow.setOnClickListener(this);
 //            cardView = (CardView) view.findViewById(R.id.cardView);
 //            cardView.setOnClickListener(this);
@@ -106,6 +107,7 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Vi
     }
 
     // Create new views (invoked by the layout manager)
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view, which defines the UI of the list item

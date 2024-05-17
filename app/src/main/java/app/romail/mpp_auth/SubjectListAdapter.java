@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
@@ -15,7 +16,7 @@ import org.json.JSONObject;
 
 public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.ViewHolder> {
 
-    private JSONArray localDataSet;
+    private final JSONArray localDataSet;
     private ItemClickListener listener;
 
     public interface ItemClickListener {
@@ -43,12 +44,12 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
             super(view);
             // Define click listener for the ViewHolder's View
             Log.d("ViewHolder", "ViewHolder: ");
-            Log.d("ViewHolder", "ViewHolder: "+view.toString());
+            Log.d("ViewHolder", "ViewHolder: "+ view);
 
-            courseName = (TextView) view.findViewById(R.id.courseName);
-            courseDescription = (TextView) view.findViewById(R.id.courseDescription);
-            courseCode = (TextView) view.findViewById(R.id.courseCode);
-            tableRow = (TableRow) view.findViewById(R.id.subjectsTable);
+            courseName = view.findViewById(R.id.courseName);
+            courseDescription = view.findViewById(R.id.courseDescription);
+            courseCode = view.findViewById(R.id.courseCode);
+            tableRow = view.findViewById(R.id.subjectsTable);
             tableRow.setOnClickListener(this);
             //textView = (TextView) view.findViewById(R.id.textView);
 //            cardView = (CardView) view.findViewById(R.id.cardView);
@@ -100,6 +101,7 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
     }
 
     // Create new views (invoked by the layout manager)
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view, which defines the UI of the list item
@@ -117,9 +119,9 @@ public class SubjectListAdapter extends RecyclerView.Adapter<SubjectListAdapter.
         // contents of the view with that element
         try {
             JSONObject course = localDataSet.getJSONObject(position);
-            viewHolder.courseName.setText(course.getString("name"));
-            viewHolder.courseDescription.setText(course.getString("description"));
-            viewHolder.courseCode.setText(course.getString("code"));
+            viewHolder.getCourseName().setText(course.getString("name"));
+            viewHolder.getCourseDescription().setText(course.getString("description"));
+            viewHolder.getCourseCode().setText(course.getString("code"));
 
         } catch (JSONException e) {
             throw new RuntimeException(e);

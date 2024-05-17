@@ -8,11 +8,12 @@ import android.os.Bundle;
 import android.util.Log;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * This class emulates a NFC Forum Tag Type 4 containing a NDEF message
  * The class uses the AID D2760000850101
- * Credit: https://github.com/MichaelsPlayground/NfcHceNdefEmulator
+ * Credit: <a href="https://github.com/MichaelsPlayground/NfcHceNdefEmulator">...</a>
  */
 public class HCEService extends HostApduService {
 
@@ -89,9 +90,10 @@ public class HCEService extends HostApduService {
         mNdefSelected = false;
 
         // default NDEF-message
-        final String DEFAULT_MESSAGE = "This is the default message from NfcHceNdelEmulator. If you want to change the message use the tab 'Send' to enter an individual message.";
+        final String DEFAULT_MESSAGE = ".";
         NdefMessage ndefDefaultMessage = getNdefMessage(DEFAULT_MESSAGE);
         // the maximum length is 246 so do not extend this value
+        assert ndefDefaultMessage != null;
         int nlen = ndefDefaultMessage.getByteArrayLength();
         mNdefRecordFile = new byte[nlen + 2];
         mNdefRecordFile[0] = (byte)((nlen & 0xff00) / 256);
@@ -104,9 +106,9 @@ public class HCEService extends HostApduService {
         if (intent != null) {
             // intent contains a text message
             if (intent.hasExtra("ndefMessage")) {
-                NdefMessage ndefMessage = getNdefMessage(intent.getStringExtra("ndefMessage"));
+                NdefMessage ndefMessage = getNdefMessage(Objects.requireNonNull(intent.getStringExtra("ndefMessage")));
                 if (ndefMessage != null) {
-                    Log.d((TAG), "NdefMessage: " + ndefMessage.toString());
+                    Log.d((TAG), "NdefMessage: " + ndefMessage);
                     int nlen = ndefMessage.getByteArrayLength();
                     mNdefRecordFile = new byte[nlen + 2];
                     mNdefRecordFile[0] = (byte) ((nlen & 0xff00) / 256);
@@ -119,7 +121,7 @@ public class HCEService extends HostApduService {
     }
 
     private NdefMessage getNdefMessage(String ndefData) {
-        if (ndefData.length() == 0) {
+        if (ndefData.isEmpty()) {
             return null;
         }
         NdefRecord ndefRecord;
@@ -128,7 +130,7 @@ public class HCEService extends HostApduService {
     }
 
     private NdefMessage getNdefUrlMessage(String ndefData) {
-        if (ndefData.length() == 0) {
+        if (ndefData.isEmpty()) {
             return null;
         }
         NdefRecord ndefRecord;
