@@ -47,6 +47,10 @@
         </TableRow>
 
     </TableLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp">
+    </Space>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/subjectsList"

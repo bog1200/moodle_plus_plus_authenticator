@@ -67,11 +67,15 @@ public class MainActivity extends AppCompatActivity {
             startActivity(loginIntent);
         });
 
+        //TODO: Show this only if the user is a teacher
         Button subjectsButton = findViewById(R.id.subjectsButton);
         subjectsButton.setOnClickListener(v -> {
             Intent subjectsIntent = new Intent(this, SubjectListActivity.class);
             startActivity(subjectsIntent);
         });
+
+        //TODO: else button that starts the student attendance HCE
+
 
 
 

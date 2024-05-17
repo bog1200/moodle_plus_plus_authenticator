@@ -40,14 +40,17 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Nr. of students"
+                android:text="No. of atten."
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:layout_weight="1" />
 
         </TableRow>
 
     </TableLayout>
-
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp">
+    </Space>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/coursesList"
         android:layout_width="match_parent"
