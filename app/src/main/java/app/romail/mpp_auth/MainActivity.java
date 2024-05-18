@@ -17,6 +17,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.auth0.android.jwt.JWT;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -32,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Intent loginIntent = new Intent(this, LoginActivity.class);
-
 
         SharedPreferences sharedPreferences = this.getSharedPreferences("MPP_AUTH", MODE_PRIVATE);
         if (!sharedPreferences.contains("accessToken") || !sharedPreferences.contains("refreshToken")) {
@@ -74,19 +75,40 @@ public class MainActivity extends AppCompatActivity {
             startActivity(subjectsIntent);
         });
 
+        Button takeAttendanceButton = findViewById(R.id.takeAttendance);
+        List<String> userRole = getUserRole();
+
+        if (userRole.contains("ROLE_STUDENT")) {
+            takeAttendanceButton.setVisibility(Button.VISIBLE);
+        } else {
+                takeAttendanceButton.setVisibility(Button.GONE);
+        }
+
+
+
         //TODO: else button that starts the student attendance HCE
         //TODO EXTRA: Show the attendance status of the student
 
 
 
-
-
-
-
-
     }
 
+//    private boolean determineIfUserIsTeacher() {
+//        SharedPreferences sharedPreferences = this.getSharedPreferences("MPP_AUTH", MODE_PRIVATE);
+//        String tokenString = sharedPreferences.getString("accessToken", "");
+//        JWT token = new JWT(tokenString);
+//        //Array of strings
+//        String[] roles = token.getClaim("roles").asArray(String.class);
+//        return Arrays.asList(roles).contains("role_teacher");
+//}
+    private List<String> getUserRole() {
+        SharedPreferences sharedPreferences = this.getSharedPreferences("MPP_AUTH", MODE_PRIVATE);
+        String tokenString = sharedPreferences.getString("accessToken", "");
+        JWT token = new JWT(tokenString);
+        List<String> roles = token.getClaim("roles").asList(String.class);
 
+        return roles;
+    }
 
 
     @SuppressLint("MissingSuperCall")

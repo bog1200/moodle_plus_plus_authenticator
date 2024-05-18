@@ -26,7 +26,7 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="20dp" />
-    <!-- android:textColor="@color/button_text_color" -->
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,16 +54,22 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/logoutButton"
+        android:id="@+id/takeAttendance"
         android:backgroundTint="#001C27"
         android:textColor="@color/button_text_color"
-        android:text="Log Out"/>
+        android:text="Take attendance"/>
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="20dp" />
 
-
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/logoutButton"
+        android:backgroundTint="#001C27"
+        android:textColor="@color/button_text_color"
+        android:text="Log Out"/>
 
     <FrameLayout
     android:id="@+id/bottom_container"
