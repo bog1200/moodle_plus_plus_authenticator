@@ -5,9 +5,12 @@ import static android.content.Context.MODE_PRIVATE;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.auth0.android.jwt.JWT;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -15,8 +18,6 @@ import java.util.concurrent.Future;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
-import com.auth0.android.jwt.JWT;
 
 
 public class HttpRequest {
@@ -30,6 +31,15 @@ public class HttpRequest {
         String subject = accessToken.getSubject();
         return Long.parseLong(subject);
     }
+
+    public static List<String> getUserRole(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MPP_AUTH", MODE_PRIVATE);
+        String tokenString = sharedPreferences.getString("accessToken", "");
+        JWT token = new JWT(tokenString);
+        List<String> roles = token.getClaim("roles").asList(String.class);
+        return roles;
+    }
+
     public static JSONObject GetRequest(Context context, String url) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("MPP_AUTH", MODE_PRIVATE);
         JWT accessToken = new JWT(sharedPreferences.getString("accessToken", ""));
@@ -61,6 +71,8 @@ public class HttpRequest {
             throw new RuntimeException(e);
         }
     }
+
+
 
     public static JSONArray GetRequestArray(Context context, String url) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("MPP_AUTH", MODE_PRIVATE);

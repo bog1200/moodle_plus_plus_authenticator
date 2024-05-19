@@ -68,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(loginIntent);
         });
 
-        //TODO: Show this only if the user is a teacher
         Button subjectsButton = findViewById(R.id.subjectsButton);
         subjectsButton.setOnClickListener(v -> {
             Intent subjectsIntent = new Intent(this, SubjectListActivity.class);
@@ -76,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Button takeAttendanceButton = findViewById(R.id.takeAttendance);
-        List<String> userRole = getUserRole();
+        List<String> userRole = HttpRequest.getUserRole(this);
 
         if (userRole.contains("ROLE_STUDENT")) {
             takeAttendanceButton.setVisibility(Button.VISIBLE);
@@ -101,14 +100,7 @@ public class MainActivity extends AppCompatActivity {
 //        String[] roles = token.getClaim("roles").asArray(String.class);
 //        return Arrays.asList(roles).contains("role_teacher");
 //}
-    private List<String> getUserRole() {
-        SharedPreferences sharedPreferences = this.getSharedPreferences("MPP_AUTH", MODE_PRIVATE);
-        String tokenString = sharedPreferences.getString("accessToken", "");
-        JWT token = new JWT(tokenString);
-        List<String> roles = token.getClaim("roles").asList(String.class);
 
-        return roles;
-    }
 
 
     @SuppressLint("MissingSuperCall")

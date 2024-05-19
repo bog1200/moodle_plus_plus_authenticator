@@ -12,30 +12,37 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.Objects;
 
-public class CourseListActivity extends AppCompatActivity implements CourseListAdapter.ItemClickListener {
+public class CourseListStudentActivity extends AppCompatActivity implements CourseListStudentAdapter.ItemClickListener{
 
     String subjectName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teacher_courses_list);
+        setContentView(R.layout.activity_student_courses_list);
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
         String subjectId = String.valueOf(intent.getIntExtra("subjectId",0));
+        JSONArray subjects;
+        try {
+            subjects = new JSONArray(intent.getStringExtra("subjectList"));
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
         subjectName = intent.getStringExtra("subjectName");
 
-        JSONArray subjects = HttpRequest.GetRequestArray(this, "/course/getBySubject/"+subjectId);
-        if (subjects.length() == 0) {
+        JSONArray attendances = HttpRequest.GetRequestArray(this, "/courses/attendance/student/"+subjectId);
+        if (attendances.length() == 0) {
             // No subjects found
             return;
         }
         // Display the subjects
-        RecyclerView recyclerView = findViewById(R.id.coursesList);
-        CourseListAdapter customAdapter = new CourseListAdapter(subjects);
+        RecyclerView recyclerView = findViewById(R.id.coursesListStudent);
+        CourseListStudentAdapter customAdapter = new CourseListStudentAdapter(subjects, attendances);
         recyclerView.setAdapter(customAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -49,10 +56,5 @@ public class CourseListActivity extends AppCompatActivity implements CourseListA
     @Override
     public void onItemClick(View view, int position) {
         Toast.makeText(this, "You clicked " + position, Toast.LENGTH_SHORT).show();
-        //TODO: Add course details activity, where you can see the attendance and other details, also start the attendance (send the request to start the attendance)
-        Intent intent = new Intent(this, CourseDetailsActivity.class);
-        intent.putExtra("courseId", position);
-        intent.putExtra("subjectName", subjectName);
-        startActivity(intent);
     }
 }

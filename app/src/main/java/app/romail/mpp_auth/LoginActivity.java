@@ -113,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
             dIntent.putExtra(NfcIdReadActivity.KEY_EXP, "251231");
             dIntent.putExtra(NfcIdReadActivity.KEY_DOCUMENT_NUMBER, "123456");
             dIntent.putExtra(NfcIdReadActivity.KEY_COUNTRY, "ROU");
-            dIntent.putExtra(NfcIdReadActivity.KEY_PIN, "1234567891");
+            dIntent.putExtra(NfcIdReadActivity.KEY_PIN, "1234567890");
             startActivity(dIntent);
         });
 

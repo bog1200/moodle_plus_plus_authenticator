@@ -45,7 +45,8 @@
         android:id="@+id/subjectsButton"
         android:backgroundTint="#001C27"
         android:textColor="@color/button_text_color"
-        android:text="Get Subjects"/>
+        android:text="Get Subjects"
+        android:visibility="invisible"/>
 
     <Space
         android:layout_width="match_parent"
