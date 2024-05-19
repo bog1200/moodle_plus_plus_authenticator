@@ -27,7 +27,7 @@ public class HCEService extends HostApduService {
             (byte) 0x04, // P1	- Parameter 1 - Instruction parameter 1
             (byte) 0x00, // P2	- Parameter 2 - Instruction parameter 2
             (byte) 0x07, // Lc field	- Number of bytes present in the data field of the command
-            (byte) 0xD2, (byte) 0x76, (byte) 0x00, (byte) 0x00, (byte) 0x85, (byte) 0x01, (byte) 0x01, // NDEF Tag Application name D2 76 00 00 85 01 01
+            (byte) 0xD2, (byte) 0x76, (byte) 0x00, (byte) 0x00, (byte) 0x85, (byte) 0x01, (byte) 0x00, // NDEF Tag Application name D2 76 00 00 85 01 01
             (byte) 0x00  // Le field	- Maximum number of bytes expected in the data field of the response to the command
     };
 
@@ -90,7 +90,7 @@ public class HCEService extends HostApduService {
         mNdefSelected = false;
 
         // default NDEF-message
-        final String DEFAULT_MESSAGE = ".";
+        final String DEFAULT_MESSAGE = "ABCDEF";
         NdefMessage ndefDefaultMessage = getNdefMessage(DEFAULT_MESSAGE);
         // the maximum length is 246 so do not extend this value
         assert ndefDefaultMessage != null;
@@ -129,15 +129,6 @@ public class HCEService extends HostApduService {
         return new NdefMessage(ndefRecord);
     }
 
-    private NdefMessage getNdefUrlMessage(String ndefData) {
-        if (ndefData.isEmpty()) {
-            return null;
-        }
-        NdefRecord ndefRecord;
-        ndefRecord = NdefRecord.createUri(ndefData);
-        return new NdefMessage(ndefRecord);
-    }
-
     /**
      * emulates an NFC Forum Tag Type 4
      */
@@ -150,20 +141,20 @@ public class HCEService extends HostApduService {
             mAppSelected = true;
             mCcSelected = false;
             mNdefSelected = false;
-            Log.d((TAG), "responseApdu: " + HCEUtils.bytesToHex(SUCCESS_SW));
+            Log.d((TAG), "selectApdu: " + HCEUtils.bytesToHex(SUCCESS_SW));
             return SUCCESS_SW;
             // check if commandApdu qualifies for SELECT_CAPABILITY_CONTAINER
         } else if (mAppSelected && Arrays.equals(SELECT_CAPABILITY_CONTAINER, commandApdu)) {
             mCcSelected = true;
             mNdefSelected = false;
-            Log.d((TAG), "responseApdu: " + HCEUtils.bytesToHex(SUCCESS_SW));
+            Log.d((TAG), "ccApdu: " + HCEUtils.bytesToHex(SUCCESS_SW));
             return SUCCESS_SW;
             // check if commandApdu qualifies for SELECT_NDEF_FILE
         } else if (mAppSelected && Arrays.equals(SELECT_NDEF_FILE, commandApdu)) {
             // NDEF
             mCcSelected = false;
             mNdefSelected = true;
-            Log.d((TAG), "responseApdu: " + HCEUtils.bytesToHex(SUCCESS_SW));
+            Log.d((TAG), "selectNDEFApdu: " + HCEUtils.bytesToHex(SUCCESS_SW));
             return SUCCESS_SW;
             // check if commandApdu qualifies for // READ_BINARY
         } else if (commandApdu[0] == (byte)0x00 && commandApdu[1] == (byte)0xb0) {
@@ -178,13 +169,13 @@ public class HCEService extends HostApduService {
             if (mCcSelected && offset == 0 && le == CAPABILITY_CONTAINER_FILE.length) {
                 System.arraycopy(CAPABILITY_CONTAINER_FILE, offset, responseApdu, 0, le);
                 System.arraycopy(SUCCESS_SW, 0, responseApdu, le, SUCCESS_SW.length);
-                Log.d((TAG), "responseApdu: " + HCEUtils.bytesToHex(responseApdu));
+                Log.d((TAG), "len1: " + HCEUtils.bytesToHex(responseApdu));
                 return responseApdu;
             } else if (mNdefSelected) {
                 if (offset + le <= mNdefRecordFile.length) {
                     System.arraycopy(mNdefRecordFile, offset, responseApdu, 0, le);
                     System.arraycopy(SUCCESS_SW, 0, responseApdu, le, SUCCESS_SW.length);
-                    Log.d((TAG), "responseApdu: " + HCEUtils.bytesToHex(responseApdu));
+                    Log.d((TAG), "len2: " + HCEUtils.bytesToHex(responseApdu));
                     return responseApdu;
                 }
             }
