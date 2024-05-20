@@ -41,6 +41,7 @@
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:id="@+id/logo_new"
+                android:contentDescription="@string/logo"
                 android:src="@drawable/logo_new"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp" />
@@ -112,9 +113,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="#001C27"
-                    android:layout_marginEnd="120dp"
+                    android:layout_marginEnd="140dp"
                     android:textColor="@color/button_text_color"
-                    android:text="NFC Read" />
+                    android:text="@string/nfc_read"
+                    tools:ignore="ButtonStyle" />
 
                 <Button
                     android:id="@+id/button3"
@@ -123,7 +125,8 @@
                     android:textColor="@color/button_text_color"
                     android:backgroundTint="#001C27"
 
-                    android:text="Demo Mode" />
+                    android:text="@string/demo_mode"
+                    tools:ignore="ButtonStyle" />
 
         </LinearLayout>
 

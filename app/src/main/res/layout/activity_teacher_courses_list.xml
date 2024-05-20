@@ -7,7 +7,7 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Details of courses "
+        android:text="@string/details_of_courses"
         android:textSize="24sp"
         android:textStyle="bold"
         android:gravity="center"
@@ -26,21 +26,21 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Start date"
+                android:text="@string/start_date"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:layout_weight="1" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="End date"
+                android:text="@string/end_date"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:layout_weight="1" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="No. of atten."
+                android:text="@string/no_of_atten"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:layout_weight="1" />
 

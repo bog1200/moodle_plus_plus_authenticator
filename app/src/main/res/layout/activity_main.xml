@@ -18,7 +18,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to Moodle++"
+        android:text="@string/welcome_to_moodle"
         android:textSize="24sp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
@@ -33,7 +33,7 @@
         android:id="@+id/totpButton"
         android:backgroundTint="#001C27"
         android:textColor="@color/button_text_color"
-        android:text="Generate TOTP"/>
+        android:text="@string/generate_totp"/>
 
     <Space
         android:layout_width="match_parent"
@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#001C27"
-        android:text="Get Subjects"
+        android:text="@string/get_subjects"
         android:textColor="@color/button_text_color"
         android:visibility="visible" />
 
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/takeAttendance"
         android:backgroundTint="#001C27"
-        android:text="Take attendance"
+        android:text="@string/take_attendance"
         android:textColor="@color/button_text_color"
         android:visibility="gone" />
 
@@ -71,7 +71,7 @@
         android:id="@+id/logoutButton"
         android:backgroundTint="#001C27"
         android:textColor="@color/button_text_color"
-        android:text="Log Out"/>
+        android:text="@string/log_out"/>
 
     <FrameLayout
     android:id="@+id/bottom_container"

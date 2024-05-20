@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -7,7 +8,7 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Subjects available"
+        android:text="@string/subjects_available"
         android:textSize="24sp"
         android:textStyle="bold"
         android:gravity="center"
@@ -21,26 +22,27 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            tools:ignore="UselessParent">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Name"
+                android:text="@string/name"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:layout_weight="1" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Description"
+                android:text="@string/description"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:layout_weight="1" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Code"
+                android:text="@string/code"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:layout_weight="1" />
 
