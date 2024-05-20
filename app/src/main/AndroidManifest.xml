@@ -12,6 +12,7 @@
         android:required="true" />
 
 
+    <uses-permission android:name="android.permission.VIBRATE" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -59,6 +60,11 @@
         </activity>
         <activity
             android:name=".CourseListStudentActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MAuth">
+        </activity>
+        <activity
+            android:name=".NfcReceive"
             android:exported="false"
             android:theme="@style/Theme.MAuth">
         </activity>

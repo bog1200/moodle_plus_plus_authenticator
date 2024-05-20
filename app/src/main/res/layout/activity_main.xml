@@ -40,13 +40,13 @@
         android:layout_height="20dp" />
 
     <Button
+        android:id="@+id/subjectsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/subjectsButton"
         android:backgroundTint="#001C27"
-        android:textColor="@color/button_text_color"
         android:text="Get Subjects"
-        android:visibility="invisible"/>
+        android:textColor="@color/button_text_color"
+        android:visibility="visible" />
 
     <Space
         android:layout_width="match_parent"

@@ -3,6 +3,7 @@ package app.romail.mpp_auth;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,12 @@ public class CourseDetailsActivity extends AppCompatActivity implements CourseDe
                 throw new RuntimeException(e);
             }
         }
+        Button buttonNfcReceive = findViewById(R.id.startAttendanceButton);
+        buttonNfcReceive.setOnClickListener(v->{
+            Intent intentNfc = new Intent(this, NfcReceive.class);
+            intentNfc.putExtra("courseId", courseId);
+            startActivity(intentNfc);
+        });
         // Display the attendances
         RecyclerView recyclerView = findViewById(R.id.courseDetailsList);
         CourseDetailsAdapter customAdapter = new CourseDetailsAdapter(students);
