@@ -2,7 +2,6 @@ package app.romail.mpp_auth;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
@@ -78,16 +77,16 @@ public class NfcIdReadActivity extends AppCompatActivity {
         expView.setText(outputFormat.format(expDate));
 
         // if device supports host card emulation, start HCE service
-        PackageManager packageManager = this.getPackageManager();
-        if (packageManager.hasSystemFeature(PackageManager.FEATURE_NFC_HOST_CARD_EMULATION)) {
-            Intent hceIntent = new Intent(this, HCEService.class);
-            assert country != null;
-            hceIntent.putExtra("ndefMessage", country.concat(idNumber));
-            startService(hceIntent);
-        }
-        else {
-            Toast.makeText(this, "This device does not support NFC Host Card Emulation.", Toast.LENGTH_LONG).show();
-        }
+//        PackageManager packageManager = this.getPackageManager();
+//        if (packageManager.hasSystemFeature(PackageManager.FEATURE_NFC_HOST_CARD_EMULATION)) {
+//            Intent hceIntent = new Intent(this, HCEService.class);
+//            assert country != null;
+//            hceIntent.putExtra("ndefMessage", country.concat(idNumber));
+//            startService(hceIntent);
+//        }
+//        else {
+//            Toast.makeText(this, "This device does not support NFC Host Card Emulation.", Toast.LENGTH_LONG).show();
+//        }
         Button loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(view -> {
             boolean loggedIn = HttpRequest.IdAuthRequest(this, country, pin);

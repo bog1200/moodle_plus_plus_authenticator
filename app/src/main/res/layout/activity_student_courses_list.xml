@@ -13,6 +13,19 @@
         android:gravity="center"
         android:padding="10dp" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New student attendance"
+        android:id="@+id/newStudentAttendance"
+        android:layout_margin="16dp"
+        android:textColor="@color/button_text_color"
+        android:backgroundTint="#001C27"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,23 +39,26 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="Start date"
                 android:textAppearance="?attr/textAppearanceHeadline6"
-                android:layout_weight="1" />
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="End date"
                 android:textAppearance="?attr/textAppearanceHeadline6"
-                android:layout_weight="1" />
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="Present"
                 android:textAppearance="?attr/textAppearanceHeadline6"
-                android:layout_weight="1" />
+                android:visibility="gone" />
 
         </TableRow>
 
@@ -51,9 +67,11 @@
         android:layout_width="match_parent"
         android:layout_height="20dp">
     </Space>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/coursesListStudent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:visibility="gone" />
 </LinearLayout>

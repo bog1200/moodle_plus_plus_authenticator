@@ -27,7 +27,7 @@ public class HCEService extends HostApduService {
             (byte) 0x04, // P1	- Parameter 1 - Instruction parameter 1
             (byte) 0x00, // P2	- Parameter 2 - Instruction parameter 2
             (byte) 0x07, // Lc field	- Number of bytes present in the data field of the command
-            (byte) 0xD2, (byte) 0x76, (byte) 0x00, (byte) 0x00, (byte) 0x85, (byte) 0x01, (byte) 0x00, // NDEF Tag Application name D2 76 00 00 85 01 01
+            (byte) 0xD2, (byte) 0x76, (byte) 0x00, (byte) 0x00, (byte) 0x85, (byte) 0x01, (byte) 0x01, // NDEF Tag Application name D2 76 00 00 85 01 01
             (byte) 0x00  // Le field	- Maximum number of bytes expected in the data field of the response to the command
     };
 

@@ -59,11 +59,11 @@ public class SubjectListActivity extends AppCompatActivity implements SubjectLis
         //TODO: check if the user is a student or a teacher. If it is a student, open the student course list, if it is a teacher, open the teacher course list
 
         if(HttpRequest.getUserRole(this).contains("ROLE_STUDENT")){
-//            Intent intent = new Intent(this, CourseListStudentActivity.class);
-//            intent.putExtra("subjectId", position);
-//            intent.putExtra("subjectName", subjectName);
-//            intent.putExtra("subjectList", subjects.toString());
-//      startActivity(intent);
+            Intent intent = new Intent(this, CourseListStudentActivity.class);
+            intent.putExtra("subjectId", position);
+            intent.putExtra("subjectName", subjectName);
+            intent.putExtra("subjectList", subjects.toString());
+      startActivity(intent);
         } else if(HttpRequest.getUserRole(this).contains("ROLE_TEACHER")){
             Intent intent = new Intent(this, CourseListActivity.class);
             intent.putExtra("subjectId", position);

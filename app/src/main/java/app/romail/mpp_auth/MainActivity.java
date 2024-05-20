@@ -17,8 +17,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.auth0.android.jwt.JWT;
 
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -74,14 +72,14 @@ public class MainActivity extends AppCompatActivity {
             startActivity(subjectsIntent);
         });
 
-        Button takeAttendanceButton = findViewById(R.id.takeAttendance);
-        List<String> userRole = HttpRequest.getUserRole(this);
+//        Button takeAttendanceButton = findViewById(R.id.takeAttendance);
+//        List<String> userRole = HttpRequest.getUserRole(this);
 
-        if (userRole.contains("ROLE_STUDENT")) {
-            takeAttendanceButton.setVisibility(Button.VISIBLE);
-        } else {
-                takeAttendanceButton.setVisibility(Button.GONE);
-        }
+//        if (userRole.contains("ROLE_STUDENT")) {
+//            takeAttendanceButton.setVisibility(Button.VISIBLE);
+//        } else {
+//                takeAttendanceButton.setVisibility(Button.GONE);
+//        }
 
 
 

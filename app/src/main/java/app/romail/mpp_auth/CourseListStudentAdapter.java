@@ -4,7 +4,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.TableRow;
 import android.widget.TextView;
 
@@ -34,7 +33,7 @@ public class CourseListStudentAdapter extends RecyclerView.Adapter<CourseListStu
 
         private final TextView startDate;
         private final TextView endDate;
-        private final CheckBox presence;
+//        private final CheckBox presence;
 
         private final TableRow tableRow;
         private final TextView textView;
@@ -48,8 +47,8 @@ public class CourseListStudentAdapter extends RecyclerView.Adapter<CourseListStu
             textView = view.findViewById(R.id.textView);
             startDate = view.findViewById(R.id.startDate);
             endDate = view.findViewById(R.id.endDate);
-            presence = view.findViewById(R.id.presence);
-            tableRow = view.findViewById(R.id.coursesTable);
+//            presence = view.findViewById(R.id.presence);
+            tableRow = view.findViewById(R.id.coursesStudentTable);
             tableRow.setOnClickListener(this);
         }
 
@@ -65,9 +64,9 @@ public class CourseListStudentAdapter extends RecyclerView.Adapter<CourseListStu
             return endDate;
         }
 
-        public CheckBox getPresence() {
-            return presence;
-        }
+//        public CheckBox getPresence() {
+//            return presence;
+//        }
 
         public TableRow getTableRow() {
             return tableRow;
@@ -115,7 +114,7 @@ public class CourseListStudentAdapter extends RecyclerView.Adapter<CourseListStu
             Timestamp startT = new Timestamp(course.getLong("startDate"));
             Timestamp endT = new Timestamp(course.getLong("endDate"));
             boolean isPresent = course.getBoolean("presence");
-            viewHolder.getPresence().setChecked(isPresent);
+//            viewHolder.getPresence().setChecked(isPresent);
             viewHolder.getStartDate().setText(startT.toString());
             viewHolder.getEndDate().setText(endT.toString());
         } catch (JSONException e) {

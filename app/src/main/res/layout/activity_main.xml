@@ -57,8 +57,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/takeAttendance"
         android:backgroundTint="#001C27"
+        android:text="Take attendance"
         android:textColor="@color/button_text_color"
-        android:text="Take attendance"/>
+        android:visibility="gone" />
 
     <Space
         android:layout_width="match_parent"
